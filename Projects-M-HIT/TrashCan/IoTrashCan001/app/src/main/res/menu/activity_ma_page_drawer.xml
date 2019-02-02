@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_alarm_black_48dp"
+            android:title="箱满提醒" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_room_black_48dp"
+            android:title="位置信息" />
+
+    </group>
+
+    <item android:title="System">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_power_settings_new_black_48dp"
+                android:title="退出" />
+
+        </menu>
+    </item>
+
+</menu>

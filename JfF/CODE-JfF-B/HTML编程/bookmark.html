@@ -1,0 +1,271 @@
+<html>
+<head></head>
+<body>
+<a name="top">iOS/Android多任务</a>
+
+Android系统原生就支持多任务,而iOS系统是从4开始的。它的多任务并不是传统意义上的多任务,不是任何应用进程都可以在后台自由运行。真正做到支持多任务的只有苹果Safari和Mail，很多苹果亲生的应用也都并不支持。
+
+对于第三方应用，可以开放的后台运行接口只有音频播放（如QQ音乐）、地理位置检测（如谷歌地图）和网络电话（如Skype）等。
+
+在 iOS中，单击Home键可以从应用中退回桌面。之前运行的应用并不是被关闭了，而是被暂时“冻结”。已经分配给它的资源仍然没有收回，它是在运行中的。 当你重新点击应用，就会立刻进入，并恢复退出之前的状态。这就是苹果的快速切换应用功能（fast app switching）
+
+双击Home键可以激活屏幕下方的夹层，后台运行的应用都在这里。但并不是所有在这里出现的应用都是后台运行的。
+
+iOS的多任务可以分为三种：
+
+1、保持退出时状态
+
+这种多任务只是一种看起来像多任务的单任务，当按下Home键时，程序会保持状态。待到下次呼出时便恢复保存时的状态，让人看起来好像没有退出过。就好像玩PSP上游戏的临时存档一样，退出游戏之前存一下，再次进入并读档后，这个临时存档就消失了。
+
+2、有限多任务
+
+在这种多任务下，按下Home键，程序会保存到内存中，可以执行一些系统允许的进程，如音乐播放和下载等。这种多任务更快，但会占用内存。
+
+3、传统意义多任务
+
+Safari和Mail就是这种多任务。这种多任务可以让程序在切换到后台时，无限制的做出动作。对于移动设备来说，如果不限制这样的行为，任由程序在后台随意执行，电量很快就会被用光。
+
+有几种情况下，应用是真正完全退出了：1、系统为节省内存而自动终止某程序；2、用户手动长按屏幕下方多任务栏中的应用并关闭；3、尚没为iOS系统重新编译过的第三方应用（如更新之前的ONE|一个），这种应用无法被冻结，所以退出即终止。
+
+能够在后台运行的应用有限
+
+之所以iOS系统会给人伪多任务的印象，是因为苹果处于延迟续航时间等考虑，强制仅有少数几种应用能够被授权在后台运行。大多数应用在退出后会被挂起，挂起后的10秒钟内，仍然占用着原来的资源，用以一些善后工作。
+
+当后台的应用过多，运行内存不够时，系统会自动结束认为最没用的进程，或是运行最早的那个进程。而那些被允许在后台允许的应用，系统会通过专门的API给予其永久后台权限，直到状态结束或用户主动关闭。
+
+从多任务的定义上来看，iOS系统可以进行多任务处理，但又不完全符合传统意义的多任务。它需要挂起前一个进程才能将操作分配给下一个进程。但不管怎样，它是支持多任务操作的。
+
+真正的后台是要付出代价的
+
+再 来说说Android。Android系统的运行方式是这样的：当你运行了一个应用，就进入了该应用相应的层面；当你又运行了一个应用时，就又进入了这个 应用的层面。新的层覆盖在旧的上面，相互叠加，周而复始。谷歌为开发者提供了7个API，来调整应用层之间的切换和运行，它的用途主要是用来设置如何切 换，以及切换后要做怎样的操作。
+
+当新的层活动时，会叠加到下面的层上，下面的层就会冻结，或者说是被挂起。新的层处于激活状态。这时按返回键的话，所有不可见的层就全部被冻结。在Android系统后台冻结中的应用
+
+在后台运行上，谷歌提供了两种解决方案：
+
+服务类（Service）：
+可为应用提供一个内容由程序自身决定的服务，应用可以将需要在后台执行的操作写入服务中。当这个应用被切回后台，它的所以活动都被冻结。但写入服务的那些操作仍然可由系统继续执行。如QQ这样，只运行该应用的某个活动。
+
+广播接收类（Broadcast receiver）：
+它可以让应用在后台完整运行，而不像服务类，只能运行某一部分活动。但前提是应用必须给系统一个既定的运行时间和目标，当应用消耗完时间，或达成了目标后，系统就会结束并冻结该应用的所有活动。这个类普遍存在于闹钟和GPS类的应用当中。
+
+当然，这两种类并不是随便给予的，还是要有一定限制条件，在某种用途中可以指定分配服务类或广播类。广播类还会根据需求限制最大时间，从而防止被应用随意使用，造成系统拖慢。
+
+理论上Android系统没有运行程序的数量限制，只要内存足够，可以无限制的开启任意多个应用。最后，当后台中运行的应用越来越多，运行内存吃紧，系统便 会强制结束冻结中的活动。优先结束没有服务类和广播类的活动，其次是服务类，如果内存还是不够，最后就会结束广播类的活动。
+
+总结：
+
+从上面两个系统的多任务的描述来看，iOS和Android都是支持多任务的，而且机制几乎相同——大体上都是，前台运行后台挂，特殊情况有权限。
+
+比较起来，Android系统给予应用的特殊权限比iOS要多些（这也是为什么iOS用起来比较顺滑的原因）。这还得说iOS有比较先进的推送系统，而Android就比较惭愧了。
+
+所以为了让更多活动及时的从后台推送到前台，Android就必须让更多的应用在后台运行，也就需要占用更多的内存和处理能力，自然需要付出更高的电力和更好的硬件作为代价。
+
+
+ios和android后台推送机制的区别
+        iOS 的推送：就是 Apple 官方的 APNs （Apple Push Notification service）。
+        Android 的推送：Google 官方的是 GCM (Google Cloud Messaging）。
+本质上，APNs 与 GCM 是类似的技术实现原理：即系统层有一个常驻的 TCP 长连接，一直保持的长连接，即使手机休眠的时候也在保持的长连接。这里对于大部分人来说，最不理解的就是，休眠时候都保持在那里的 TCP 长连接，不会耗电很厉害么？
+答案是：不会。这是手机的设计来做到的。TCP长连接有个心跳的时间，在国外可以很长比如30分钟，在国内则因为网络环境复杂一般10分钟。客户端发起的心跳，会短暂地消耗手机电能，但在这个心跳间隔期间，则消耗电能是很少的。当在心跳期间服务器端有推送信息过来时，客户端可以收到并做处理。
+iOS 为了真正地为用户体验负责，不允许应用在后台活动。有了这个限制，但是对于终端设备，应用又是有必要“通知”到达用户的，随时与用户主动沟通起来的（典型的如聊天应用）。依托一个或几个系统常驻进程运作，是全局的（接管所有应用的消息推送），所以可看作是独立于应用之外，而且是设备和苹果服务器之间的通讯，而非应用的提供商服务器。比如腾讯 QQ 的服务器（Provider）会给苹果公司对应的服务器（APNs）发出通知，然后再中转传送到你的设备（Devices）之上。当你接收到通知，打开应用，才开始从腾讯服务器接收数据，跟你之前看到通知里内容一样，但却是经由两个不同的通道而来。
+ 这就是 APNs 的逻辑所在：iOS 自己做个长驻后台保持连接。所有应用，有必要（申请）并且被允许（用户可以改设置）的话，可以通过 APNs 中转到达用户。
+而 Android，就不同，更像是传统桌面电脑系统做法。每个需要后台推送的应用有各自的单独后台进程，才能和各自的服务器通讯，交换数据。Android 因为后台可以长驻，尤其是国内的 Android 的手机上 Google自家的推送服务 GCM 处于基本不可用的状态。所以，各App各显神通。聊天类应用的话，大多数直接借用 XMPP 规范里的一些成果。少量如微信有IM底子的，自己开发协议。这些在实现原理上与 APNs / GCM 没有本质的区别，但有一定的技术门槛。而大多数普遍应用，要使用推送的话，则使用轮询的方式简单实现。其实，国外如 Urban Airship 自己实现了 Android 上的第三方提供的推送平台。近期国内如极光推送也实现了第三方的推送平台（技术与微信、GCM、APNs类似）。理论上，如果一个 Android 设备上多款应用都使用极光推送这种第三方推送平台的话，也可以如 APNs 一样达到节省电量、流量消耗的效果。
+IOS/ANDROID体系架构
+1、Apple IOS
+IOS是Apple长期积累的结果，系统核心、基础服务和应用框架都采用C/C++或object-C开发，而应用采用Cocoa Touch框架，以object- C开发，应用编译后以本机代码在设备上运行，因此具有很高的运行效率。
+
+ 
+Apple IOS体系架构
+
+2、Android
+Android采用的是Java技术，所有应用在一个叫Dalvik的Java虚拟机中运行，Dalvik是Android的核心，是google专门为移动设备优化的 Java虚拟机，Android应用就是典型的Java应用。可以说Java应用的优点（成熟、存在大量可重用代码）就是Android的优点，Java应用的缺 点（占内存大、运行速度略低）就是Android的缺点。所以Android移动设备要能运行顺畅，必须有高性能CPU+大内存，256M内存刚刚够，512M内存差不多了，要运行得很顺畅则需要1G内存，要知道iPhone4才256M内存。高性能CPU+大内存给基于Android的移动设备带来成本 高和耗电量大两大问题。
+ 
+Android体系架构
+
+最后总结一下： Android采用使用最广泛java技术，开发人员众多，容易上手，也需要较强大的硬件支撑；
+Apple IOS的体系架构相对较为传统，但运行效率高，对硬件的要求低，成本优势大，在现有的硬件条件下，应用运行具有最好的顺畅感，也更加省电。Apple IOS自成体系，系统架构朴实无华，但干净清晰，是目前最有效率的移动设备操作系统。
+
+
+                           
+    从上图中可以看出，Android系统架构为四层结构，从上层到下层分别是应用程序层、应用程序框架层、系统运行库层以及Linux内核层，分别介绍如下：
+    1）应用程序层
+         Android平台不仅仅是操作系统，也包含了许多应用程序，诸如SMS短信客户端程序、电话拨号程序、图片浏览器、Web浏览器等应用程序。这些应用程序都是用Java语言编写的，并且这些应用程序都是可以被开发人员开发的其他应用程序所替换，这点不同于其他手机操作系统固化在系统内部的系统软件，更加灵活和个性化。
+    2）应用程序框架层
+         应用程序框架层是我们从事Android开发的基础，很多核心应用程序也是通过这一层来实现其核心功能的，该层简化了组件的重用，开发人员可以直接使用其提供的组件来进行快速的应用程序开发，也可以通过继承而实现个性化的拓展。
+         a） Activity Manager（活动管理器）
+              管理各个应用程序生命周期以及通常的导航回退功能
+         b） Window Manager（窗口管理器）
+              管理所有的窗口程序
+         c）  Content Provider（内容提供器）
+              使得不同应用程序之间存取或者分享数据
+         d） View System（视图系统）
+              构建应用程序的基本组件
+         e） Notification Manager(通告管理器)
+              使得应用程序可以在状态栏中显示自定义的提示信息
+         f） Package Manager（包管理器） 
+              Android系统内的程序管理
+         g）Telephony Manager(电话管理器)
+              管理所有的移动设备功能
+         h）Resource Manager（资源管理器）
+              提供应用程序使用的各种非代码资源，如本地化字符串、图片、布局文件、颜色文件等
+         i）Location Manager(位置管理器)
+             提供位置服务
+         j）XMPP Service（XMPP服务）
+             提供Google Talk服务 
+  
+    3）系统运行库层
+         从图中可以看出，系统运行库层可以分成两部分，分别是系统库和Android运行时，分别介绍如下：
+         a）系统库
+              系统库是应用程序框架的支撑，是连接应用程序框架层与Linux内核层的重要纽带。其主要分为如下几个：
+              ?  Surface Manager：
+                  执行多个应用程序时候，负责管理显示与存取操作间的互动，另外也负责2D绘图与3D绘图进行显示合成。 
+??????  Media Framework： 
+                  多媒体库，基于PacketVideo OpenCore;支持多种常用的音频、视频格式录制和回放，编码格式包括MPEG4、MP3、H.264、AAC、ARM。
+              ?  SQLite:
+                  小型的关系型数据库引擎 
+              ?  OpenGL|ES：
+                  根据OpenGL ES 1.0API标准实现的3D绘图函数库 
+              ?  FreeType：
+                  提供点阵字与向量字的描绘与显示 
+              ?  WebKit：
+                  一套网页浏览器的软件引擎
+              ?  SGL：
+                  底层的2D图形渲染引擎 
+              ?  SSL：
+                  在Andorid上通信过程中实现握手 
+              ?  Libc：
+             从BSD继承来的标准C系统函数库，专门为基于embedded linux的设备定制
+ 
+         b）Android运行时
+             Android应用程序时采用Java语言编写，程序在Android运行时中执行，其运行时分为核心库和Dalvik虚拟机两部分。
+             ?  核心库
+                 核心库提供了Java语言API中的大多数功能，同时也包含了Android的一些核心API,如android.os、android.net、android.media等等。
+             ?  Dalvik虚拟机
+                 Android程序不同于J2me程序，每个Android应用程序都有一个专有的进程，并且不是多个程序运行在一个虚拟机中，而是每个Android程序都有一个Dalivik虚拟机的实例，并在该实例中执行。Dalvik虚拟机是一种基于寄存器的Java虚拟机，而不是传统的基于栈的虚拟机，并进行了内存资源使用的优化以及支持多个虚拟机的特点。需要注意的是，不同于J2me,Android程序在虚拟机中执行的并非编译后的字节码，而是通过转换工具dx将Java字节码转成dex格式的中间码。
+  
+    4）Linux内核层 
+        Android是基于Linux2.6内核，其核心系统服务如安全性、内存管理、进程管理、网路协议以及驱动模型都依赖于Linux内核。
+    基本上通过以上的学习，在对Android系统架构有了一个大致的了解之后，我们也离开始Android的开发之旅更进一步了~
+
+
+
+ iPhone OS(现在叫iOS)是iPhone, iPod touch 和 iPad 设备的操作系统.
+
+    
+ 
+  
+  
+ 
+
+   
+    1,Core OS:
+
+    是用FreeBSD和Mach所改写的Darwin, 是开源、符合POSIX标准的一个Unix核心。这一层包含或者说是提供了整个iPhone OS的一些基础功能，比如：硬件驱动, 内存管理，程序管理，线程管理（POSIX），文件系统，网络（BSD Socket）,以及标准输入输出等等，所有这些功能都会通过C语言的API来提供。另外，值得一题的是，这一层最具有UNIX色彩，如果你需要把 UNIX上所开发的程序移植到iPhone上，多半都会使用到Core OS的API.
+    核心OS层的驱动也提供了硬件和系统框架之间的接口。然而，由于安全的考虑，只有有限的系统框架类能访问内核和驱动。
+    iPhone OS提供了许多访问操作系统低层功能的接口集，iPhone 应用通过LibSystem库来访问这些功能，这些接口集如下所示：
+        线程（POSIX线程）；
+        网络（BSD sockets）；
+        文件系统访问；
+        标准I/O；
+        Bonjour和DNS服务；
+        现场信息（Locale Information）；
+        内存分配；
+        数学计算。
+    许多Core OS技术的头文件位于目录<iPhoneSDK>/usr/include/，iPhoneSDK是SDK的安装目录。
+
+    2,Core Services:
+    Core Services在Core OS基础上提供了更为丰富的功能， 它包含了Foundation.Framework和Core Foundation.Framework, 之所以叫Foundation ,就是因为它提供了一系列处理字串，排列，组合，日历，时间等等的基本功能。Foundation是属于Objective-C的API，Core Fundation是属于C的API。另外Core servieces还提供了其他的功能，比如：
+    Security, Core Location, SQLite, 和Address Book. 其中Security是用来处理认证，密码管理，按安全性管理的； Core Location是用来处理GPS定位的；SQLLite是轻量级的数据库，而AddressBook则用来处理电话薄资料的。下面是具体介绍: 
+    （1）电话本
+         电话本框架（AddressBook.framework）提供了保存在手机设备中的电话本编程接口。开发者能使用该框架访问和修改存储在用户联系 人数据库里的记录。例如，一个聊天程序可以使用该框架获得可能的联系人列表，启动聊天的进程（Process），并在视图上显示这些联系人信息等。
+    （2）核心基础框架
+        核心基础框架（CoreFoundation.framework）是基于C语言的接口集，提供iPhone应用的基本数据管理和服务功能。该框架 支持如下功能：
+        Collection数据类型（Arrays、 Sets等）；
+        Bundles；
+        字符串管理；
+        日期和时间管理；
+        原始数据块管理；
+        首选项管理；
+        URL和Stream操作；
+        线程和运行循环（Run Loops）；
+        端口和Socket通信。
+          核心基础框架与基础框架是紧密相关的，它们为相同的基本功能提供了Objective-C接口。如果开发者混合使用Foundation Objects 和Core Foundation类型，就能充分利用存在两个框架中的"toll-free bridging"。toll-free bridging意味着开发者能使用这两个框架中的任何一个的核心基础和基础类型，例如Collection和字符串类型等。每个框架中的类和数据类型的 描述注明该对象是否支持toll-free bridged。如果是，它与哪个对象桥接（toll-free bridged）。
+    （3）CFNetwork
+           CFNetwork框架（CFNetwork.framework）是一组高性能的C语言接口集，提供网络协议的面向对象的抽象。开发者可以使用 CFNetwork框架操作协议栈，并且可以访问低层的结构如BSD Sockets等。同时，开发者也能简化与FTP和HTTP服务器的通信，或解析DNS等任务。使用CFNetwork框架实现的任务如下所示：
+          BSD Sockets；
+          利用SSL或TLS创建加密连接；
+          解析DNS Hosts；
+          解析HTTP协议，鉴别HTTP和HTTPS服务器；
+          在FTP服务器工作；
+          发布、解析和浏览Bonjour服务。
+    （4）核心位置框架（Core Location Framework）
+              核心位置框架（CoreLocation.framework）主要获得手机设备当前的经纬度，核心位置框架利用附近的GPS、蜂窝基站或Wi- Fi信号信息测量用户的当前位置。iPhone地图应用使用这个功能在地图上显示用户的当前位置。开发者能融合这个技术到自己的应用中，给用户提供一些位 置信息服务。例如可以提供一个服务：基于用户的当前位置，查找附近的餐馆、商店或设备等。
+    （5）安全框架（Security Framework）
+             iPhone OS除了内置的安全特性外，还提供了外部安全框架（Security.framework），从而确保应用数据的安全性。该框架提供了管理证书、公钥/私 钥对和信任策略等的接口。它支持产生加密安全的伪随机数，也支持保存在密钥链的证书和密钥。对于用户敏感的数据，它是安全的知识库（Secure Repository）。CommonCrypto接口也支持对称加密、HMAC和数据摘要。在iPhone OS里没有OpenSSL库，但是数据摘要提供的功能在本质上与OpenSSL库提供的功能是一致的。
+    （6）SQLite
+             iPhone应用中可以嵌入一个小型SQL数据库SQLite，而不需要在远端运行另一个数据库服务器。开发者可以创建本地数据库文件，并管理这些 文件中的表格和记录。数据库SQLite为通用的目的而设计，但仍可以优化为快速访问数据库记录。访问数据库SQLite的头文件位 于<iPhoneSDK>/usr/include/sqlite3.h，其中<iPhoneSDK>是SDK安装的目标路径。
+    （7）支持XML
+             基础框架提供NSXMLParser类，解析XML文档元素。libXML2库提供操作XML内容的功能，这个开放源代码的库可以快速解析和编辑 XML数据，并且转换XML内容到HTML。访问libXML2库的头文件位于目录<iPhoneSDK>/usr/include /libxml2/，其中<iPhoneSDK>是SDK安装的目标目录。
+    3,Media
+    如同其名，Media层提供了图片，音乐，影片等多媒体功能。图像分为2D图像和3D图像， 前者由Quartz2D来支持，后者则是用OpenglES.与音乐对应的模组是Core Audio和OpenAL, Media Player 实现了影片的播放， 而最后还提供了Core Animation来对强大动画的支持。具体介绍如下:
+   （1）图像技术（Graphics Technologies）
+        高质量图像是所有iPhone应用的一个重要的组成部分。任何时候，开发者可以采用UIKit 框架中已有的视图和功能以及预定义的图像来开发iPhone应用。然而，当UIKit 框架中的视图和功能不能满足需求时，开发者可以应用下面描述的技术和方法来制作视图。
+        ① Quartz。核心图像框架（CoreGraphics.framework）包含了Quartz 2D画图API，Quartz与在Mac OS中采用的矢量图画引擎是一样先进的。Quartz支持基于路径（Path-based）画图、抗混淆（Anti-aliased）重载、梯度 （Gradients）、图像（Images）、颜色（Colors）、坐标空间转换（Coordinate-space Transformations）、pdf文档创建、显示和解析。虽然API是基于C语言的，它采用基于对象的抽象表征基础画图对象，使得图像内容易于保存和复用。
+        ② 核心动画（Core Animation）。Quartz核心框架（QuartzCore.framework）包含CoreAnimation接口，Core Animation是一种高级动画和合成技术，它用优化的重载路径（Rendering Path）实现复杂的动画和虚拟效果。它用一种高层的Objective-C接口配置动画和效果，然后重载在硬件上获得较好的性能。Core Animation集成到iPhone OS 的许多部分，包括UIKit类如UIView，提供许多标准系统行为的动画。开发者也能利用这个框架中的Objective-C接口创建客户化的动画。
+        ③ OpenGL ES。OpenGL ES框架（OpenGLES.framework）符合OpenGL ES v1.1规范，它提供了一种绘画2D和3D内容的工具。OpenGL ES 框架是基于Ｃ语言的框架，与硬件设备紧密相关，为全屏游戏类应用提供高帧率（high frame rates）。开发者总是要使用OpenGL框架的EAGL接口，EAGL接口是OpenGL ES框架的一部分，它提供了应用的OpenGL ES画图代码和本地窗口对象的接口。
+      （2）音频技术（Audio Technologies）
+       iPhone OS的音频技术为用户提供了丰富的音频体验。它包括音频回放，高质量的录音和触发设备的振动功能等。
+       iPhone OS的音频技术支持如下音频格式：AAC、Apple Lossless（ALAC）、A-law、IMA/ADPCM（IMA4）、Linear PCM、μ-law和Core Audio等。
+       ① 核心音频（Core Audio Family）。核心音频框架家族（Core Audio family of frameworks）提供了音频的本地支持，如表16-1所示。Core Audio是一个基于C语言的接口，并支持立体声（Stereo Audio）。开发能采用iPhone OS 的Core Audio框架在iPhone 应用中产生、录制、混合和播放音频。开发者也能通过核心音频访问手机设备的振动功能。
+       核心音频框架:
+框架（Framework）	服务（Service）
+CoreAudio.framework	定义核心音频的音频数据类型
+AudioUnit.framework	提供音频和流媒体文件的
+回放和录制，并且管理音
+频文件和播放提示声音
+AudioToolbox.framework	提供使用内置音频单元服务，
+音频处理模块
+
+        ② OpenAL。iPhone OS 也支持开放音频库（Open Audio Library， OpenAL）。OpenAL是一个跨平台的标准，它能传递位置音频（Positional Audio）。开发者能应用OpenAL在需要位置音频输出的游戏或其他应用中实现高性能、高质量的音频。
+           由于OpenAL是一个跨平台的标准，采用OpenAL的代码模块可以平滑地移植到其他平台。
+       （3）视频技术（Video Technologies）
+         iPhone OS通过媒体播放框架（MediaPlayer.framework）支持全屏视频回放。媒体播放框架支持的视频文件格式包括.mov, .mp4,.m4v和.3gp，并应用如下压缩标准：
+         ① H.264 Baseline Profile Level 3.0 video，在30 f/s 的情况下分辨率达到640×480像素。注意：不支持B frames；
+         ② MPEG4规范的视频部分；
+         ③ 众多的音频格式，包含在音频技术的列表里，如AAC、Apple Lossless （ALAC）、A-law、IMA/ADPCM（IMA4）、线性PCM、μ-law和Core Audio等。      
+        4,Cocoa Touch
+        最上面一层是Cocoa Touch，它是Objective-C的API, 其中最核心的部分是UIKit.Framework,应用程序界面上的各种组件，全是由它来提供呈现的，除此之外它还负责处理屏幕上的多点触摸事件，文字的输出，图片,网页的显示，相机或文件的存取，以及加速感应的部分等。具体介绍如下:
+       （1）UIKit框架
+         UIKit框架（UIKit.framework）包含Objective-C程序接口，提供实现图形，事件驱动的iPhone应用的关键架构。 iPhone OS中的每一个应用采用这个框架实现如下核心功能：
+        应用管理；
+        支持图形和窗口；
+        支持触摸事件处理；
+        用户接口管理；
+        提供用来表征标准系统视图和控件的对象；
+        支持文本和Web内容；
+        通过URL scheme与其他应用的集成。
+        为提供基础性代码建立应用，UIKit也支持一些与设备相关的特殊功能，如下所示：
+        加速计数据；
+        内建Camera；
+        用户图片库；
+        设备名称和模式信息。
+      （2）基础框架（Foundation Framework）
+           基础框架（Foundation.framework）支持如下功能：
+           Collection数据类型（包括Arrays、Sets）；
+           Bundles；
+           字符串管理；
+           日期和时间管理；
+           原始数据块管理；
+           首选项管理；
+           线程和循环；
+           URL和Stream处理；
+           Bonjour；
+           通信端口管理；
+           国际化。
+      （3）电话本UI框架（Address Book UI Framework）
+         电话本UI框架（AddressBookUI.framework）是一个Objective-C标准程序接口，主要用来创建新联系人，编辑和选择 电话本中存在的联系人。它简化了在iPhone应用中显示联系人信息，并确保所有应用使用相同的程序接口，保证应用在不同平台的一致性。
+
+<a href="#top">放回顶端</a>
+</body>
+</html>
+

@@ -1,0 +1,109 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Tue May 22 17:40:48 2018
+# Process ID: 10088
+# Log file: F:/ISE/Lab04/planAhead_run_5/planAhead.log
+# Journal file: F:/ISE/Lab04/planAhead_run_5/planAhead.jou
+#-----------------------------------------------------------
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Common 17-86] Your PlanAhead license expires in -507 day(s)
+INFO: [Device 21-36] Loading parts and site information from D:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [D:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [D:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source F:/ISE/Lab04/pa.fromNcd.tcl
+# create_project -name SimpleCycle_MIPS -dir "F:/ISE/Lab04/planAhead_run_5" -part xc6slx16csg324-3
+# set srcset [get_property srcset [current_run -impl]]
+# set_property design_mode GateLvl $srcset
+# set_property edif_top_file "F:/ISE/Lab04/Top_cs.ngc" [ get_property srcset [ current_run ] ]
+# add_files -norecurse { {F:/ISE/Lab04} {ipcore_dir} }
+# set_property target_constrs_file "nexys3.ucf" [current_fileset -constrset]
+Adding file 'F:/ISE/Lab04/nexys3.ucf' to fileset 'constrs_1'
+# add_files [list {nexys3.ucf}] -fileset [get_property constrset [current_run]]
+# link_design
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+Design is defaulting to project part: xc6slx16csg324-3
+Release 14.7 - ngc2edif P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design Top_cs.ngc ...
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+WARNING:NetListWriters:306 - Signal bus
+   U0/I_NO_D.U_ILA/U_RST/U_HALT_XFER/iDOUT_dly<2 : 0> on block ila_pro_0 is not
+   reconstructed, because there are some missing bus signals.
+WARNING:NetListWriters:306 - Signal bus
+   U0/I_NO_D.U_ILA/U_RST/U_ARM_XFER/iDOUT_dly<4 : 0> on block ila_pro_0 is not
+   reconstructed, because there are some missing bus signals.
+WARNING:NetListWriters:306 - Signal bus U0/U_ICON/iCORE_ID_SEL<15 : 0> on block
+   icon_pro is not reconstructed, because there are some missing bus signals.
+WARNING:NetListWriters:306 - Signal bus InstSignExt<14 : 0> on block Top is not
+   reconstructed, because there are some missing bus signals.
+  finished :Prep
+Writing EDIF netlist file Top_cs.edif ...
+ngc2edif: Total memory usage is 88144 kilobytes
+
+Parsing EDIF File [./planAhead_run_5/SimpleCycle_MIPS.data/cache/Top_cs_ngc_zx.edif]
+Finished Parsing EDIF File [./planAhead_run_5/SimpleCycle_MIPS.data/cache/Top_cs_ngc_zx.edif]
+INFO: [Netlist 29-17] Analyzing 46 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+Loading clock regions from D:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx16/ClockRegion.xml
+Loading clock buffers from D:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx16/ClockBuffers.xml
+Loading package pin functions from D:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/PinFunctions.xml...
+Loading package from D:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx16/csg324/Package.xml
+Loading io standards from D:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/IOStandards.xml
+Loading device configuration modes from D:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/ConfigModes.xml
+Loading list of drcs for the architecture : D:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/drc.xml
+WARNING: [Timing 38-83] Timing library cell SRLC32E does not define port A[4] which is referred to in the netlist. The library cell will be ignored and the cell will be treated as a black box for timing purposes.
+WARNING: [Timing 38-83] Timing library cell SRLC32E does not define port A[3] which is referred to in the netlist. The library cell will be ignored and the cell will be treated as a black box for timing purposes.
+WARNING: [Timing 38-83] Timing library cell SRLC32E does not define port A[2] which is referred to in the netlist. The library cell will be ignored and the cell will be treated as a black box for timing purposes.
+WARNING: [Timing 38-83] Timing library cell SRLC32E does not define port A[1] which is referred to in the netlist. The library cell will be ignored and the cell will be treated as a black box for timing purposes.
+WARNING: [Timing 38-83] Timing library cell SRLC32E does not define port A[0] which is referred to in the netlist. The library cell will be ignored and the cell will be treated as a black box for timing purposes.
+Parsing UCF File [F:/ISE/Lab04/.Xil/PlanAhead-10088-QM-PC/ngc2edif/Top_cs.xncf]
+Finished Parsing UCF File [F:/ISE/Lab04/.Xil/PlanAhead-10088-QM-PC/ngc2edif/Top_cs.xncf]
+Parsing UCF File [F:/ISE/Lab04/nexys3.ucf]
+Finished Parsing UCF File [F:/ISE/Lab04/nexys3.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 46 instances were transformed.
+  RAM256X1S => RAM256X1S (RAMS64E, RAMS64E, RAMS64E, RAMS64E, MUXF7, MUXF7, MUXF8): 32 instances
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 10 instances
+  RAM32X1D => RAM32X1D (RAMD32, RAMD32): 4 instances
+
+Phase 0 | Netlist Checksum: ef30ce0c
+link_design: Time (s): elapsed = 00:00:25 . Memory (MB): peak = 613.340 ; gain = 160.699
+# read_xdl -file "F:/ISE/Lab04/Top.ncd"
+Release 14.7 - xdl P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+WARNING:XDL:213 - The resulting xdl output will not have LUT equation strings or RAM INIT strings.
+Loading device for application Rf_Device from file '6slx16.nph' in environment D:\Xilinx\14.7\ISE_DS\ISE\.
+   "Top" is an NCD, version 3.2, device xc6slx16, package csg324, speed -3
+Successfully converted design 'F:\ISE\Lab04\Top.ncd' to 'F:\ISE\Lab04\Top.xdl'.
+INFO: [Designutils 20-669] Parsing Placement File : F:/ISE/Lab04/Top.ncd
+WARNING: [Designutils 20-665] Net Name: Switch<0>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+WARNING: [Designutils 20-665] Net Name: Switch<1>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+WARNING: [Designutils 20-665] Net Name: Switch<2>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+WARNING: [Designutils 20-665] Net Name: Switch<3>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+WARNING: [Designutils 20-665] Net Name: Switch<4>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+WARNING: [Designutils 20-665] Net Name: Switch<5>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+WARNING: [Designutils 20-665] Net Name: Switch<6>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+WARNING: [Designutils 20-665] Net Name: Switch<7>. Found in file: F:/ISE/Lab04/Top.ncd. Not Recognizable in the Context
+INFO: [Designutils 20-658] Finished Parsing Placement File : F:/ISE/Lab04/Top.ncd
+INFO: [Designutils 20-671] Placed 1921 instances
+read_xdl: Time (s): elapsed = 00:00:16 . Memory (MB): peak = 626.691 ; gain = 13.352
+# if {[catch {read_twx -name results_1 -file "F:/ISE/Lab04/Top.twx"} eInfo]} {
+#    puts "WARNING: there was a problem importing \"F:/ISE/Lab04/Top.twx\": $eInfo"
+# }
+exit
+ERROR: [PlanAhead 12-106] *** Exception: ui.h.b: Found deleted key in HTclEventBroker. Verify if the classes listed here call cleanup()
+HTclEvent: SIGNAL_MODIFY   Classes: ui.views.aR 
+HTclEvent: SIGNAL_BUS_MODIFY   Classes: ui.views.aR 
+HTclEvent: DEBUG_CORE_CONFIG_CHANGE   Classes: ui.views.aR 
+HTclEvent: DEBUG_PORT_CONFIG_CHANGE   Classes: ui.views.aR 
+ (See F:/ISE/Lab04\planAhead_pid10088.debug)
+ERROR: [Common 17-39] 'stop_gui' failed due to earlier errors.
+INFO: [Common 17-206] Exiting PlanAhead at Tue May 22 17:42:00 2018...
+INFO: [Common 17-83] Releasing license: PlanAhead

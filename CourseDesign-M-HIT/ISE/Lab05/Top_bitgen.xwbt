@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/Hawk/disk/bee4_ddr3/ttp/pipeline_MIPS/Top.ncd
+OUTFILE=/home/Hawk/disk/bee4_ddr3/ttp/pipeline_MIPS/Top.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=/home/Hawk/disk/bee4_ddr3/ttp/pipeline_MIPS
+LICENSE=ISE
+USER_INFO=__123456789_123456_123456789

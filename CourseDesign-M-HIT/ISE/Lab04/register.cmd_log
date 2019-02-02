@@ -1,0 +1,3 @@
+vhdtdtfi -lib work E:/3.Computer_organization/Lab/LabSolutions/Lab04/register.v -lang verilog -prj SimpleCycle_MIPS -o register.spl -module register -template D:/ise14.3/14.3/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan6 register.spl E:/3.Computer_organization/Lab/LabSolutions/Lab04/register.sym 
+vhdtdtfi -lang verilog -prj SimpleCycle_MIPS -o E:/3.Computer_organization/Lab/LabSolutions/Lab04/register.tfi -lib work E:/3.Computer_organization/Lab/LabSolutions/Lab04//register.v -module register -template D:/ise14.3/14.3/ISE_DS/ISE//data/tfi.tft -deleteonerror 

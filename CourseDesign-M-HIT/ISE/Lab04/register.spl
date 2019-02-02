@@ -1,0 +1,14 @@
+[Inputs]
+Clk
+RegWrite
+=RegARdAddr[4:0]=
+=RegBRdAddr[4:0]=
+=RegWrAddr[4:0]=
+=RegWrData[31:0]=
+[Outputs]
+=RegARdData[31:0]=
+=RegBRdData[31:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel register
+

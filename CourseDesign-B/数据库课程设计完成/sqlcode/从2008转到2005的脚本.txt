@@ -1,0 +1,319 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WuYeDaiBiao]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[WuYeDaiBiao](
+	[Dai_No] [int] NOT NULL,
+	[Dai_Password] [int] NOT NULL,
+	[Dai_Name] [nchar](10) NOT NULL,
+	[Dai_Sex] [nchar](2) NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WeiHuKind]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[WeiHuKind](
+	[WHK_No] [int] NOT NULL,
+	[WHK_Depression] [nchar](100) NOT NULL,
+	[WHK_Money] [money] NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GuanLiYuan_KZ]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[GuanLiYuan_KZ](
+	[GLY_No] [int] NOT NULL,
+	[GLY_Name] [nchar](10) NULL,
+	[GLY_Sex] [nchar](10) NULL,
+	[GLY_BD] [datetime] NULL,
+	[GLY_Address] [nchar](40) NULL,
+	[GLY_Tel] [int] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GuanLiYuan_JC]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[GuanLiYuan_JC](
+	[GLY_No] [int] NOT NULL,
+	[GLY_Password] [int] NOT NULL,
+ CONSTRAINT [PK_GuanLiYuan_JC] PRIMARY KEY CLUSTERED 
+(
+	[GLY_No] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WeiHuYuan]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[WeiHuYuan](
+	[WeiHuYuan_No] [int] NOT NULL,
+	[WeiHuYuan_Password] [int] NULL,
+	[WHY_Name] [nchar](10) NULL,
+	[WHY_Sex] [nchar](2) NULL,
+	[WHY_Tel] [int] NULL,
+ CONSTRAINT [PK_WeiHuYuan] PRIMARY KEY CLUSTERED 
+(
+	[WeiHuYuan_No] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[YeZhu_KZ]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[YeZhu_KZ](
+	[YeZhuNo] [int] NOT NULL,
+	[YZ_name] [nchar](10) NULL,
+	[YZ_sex] [nchar](10) NULL,
+	[YZ_address] [nchar](30) NULL,
+	[YZ_BD] [datetime] NULL,
+	[YZ_Tel] [int] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Price]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Price](
+	[Price_Shui] [float] NOT NULL,
+	[Price_Dian] [float] NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[YeZhu_JC]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[YeZhu_JC](
+	[YeZhuNo] [int] NOT NULL,
+	[RuZhuData] [datetime] NULL,
+	[LouNo] [int] NULL,
+	[DanYuanNo] [int] NULL,
+	[MenPaiHao] [int] NULL,
+	[YeZhuPassword] [int] NULL,
+ CONSTRAINT [PK_YeZhu_JC] PRIMARY KEY CLUSTERED 
+(
+	[YeZhuNo] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WeiHu_JC]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[WeiHu_JC](
+	[YeZhuNo] [int] NOT NULL,
+	[BX_date] [datetime] NOT NULL,
+	[BX_Lou_No] [int] NULL,
+	[BX_DanYuan_No] [int] NULL,
+	[BX_MeiPai_No] [int] NULL,
+	[BX_Depression] [nchar](100) NULL,
+	[WeiHuYuan_No] [int] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ZhangDang_Liang]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[ZhangDang_Liang](
+	[ZD_No] [int] NOT NULL,
+	[ZD_SDate] [datetime] NULL,
+	[ZD_EDate] [datetime] NULL,
+	[ZD_ShuLang] [int] NULL,
+	[ZD_DianLang] [int] NULL,
+	[YeZhuNo] [int] NULL,
+ CONSTRAINT [PK_ZhangDang_Liang] PRIMARY KEY CLUSTERED 
+(
+	[ZD_No] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create trigger [proSecond]
+on [dbo].[ZhangDang_Liang]
+after update,insert
+as 
+begin
+  declare @t_shuiLiang int,@t_dianLiang int
+  declare @t_shuiPrice int,@t_dianPrice int
+  declare @t_shuiMoney int,@t_dianMoney int
+  declare @t_No int, @t_sdate datetime,@t_edate datetime,
+			@t_yezhuno int
+			
+			
+  select @t_shuiPrice=Price_Shui,@t_dianPrice=Price_Dian
+  from price
+  
+  declare curFirst cursor
+  for 
+  select ZD_No,ZD_SDate,ZD_EDate,ZD_ShuLang,ZD_DianLang,YeZhuNo
+  from ZhangDang_Liang
+  
+  open curFirst
+  fetch curFirst into @t_No,@t_sdate,@t_edate,@t_shuiLiang,
+		@t_dianLiang,@t_yezhuno
+		
+  while(@@FETCH_STATUS=0)
+  begin
+	set @t_shuiMoney=@t_shuiPrice*@t_shuiLiang
+	set @t_dianMoney=@t_dianPrice*@t_dianLiang
+	
+	
+
+	
+	update ZhangDan_Money
+	set ZD_SDate=@t_sdate,ZD_EDate=@t_edate
+	,ZD_ShuFei=@t_shuiMoney,ZD_DianFei=@t_dianMoney
+	,YeZhuNo=@t_yezhuno
+	where  ZD_No=@t_No
+	
+	fetch curFirst into @t_No,@t_sdate,@t_edate,@t_shuiLiang,
+		@t_dianLiang,@t_yezhuno
+  end
+ 
+  close curFirst
+  deallocate curFirst
+ 
+
+end
+
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WeiHu_ZT]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[WeiHu_ZT](
+	[WH_Statue] [nchar](10) NULL,
+	[WH_Accept] [nchar](10) NULL,
+	[YeZhuNo] [int] NULL,
+	[WH_Date] [datetime] NULL,
+	[WeiHuYuan_No] [int] NULL,
+	[WHK_No] [int] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ZhangDan_Money]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[ZhangDan_Money](
+	[ZD_No] [int] NOT NULL,
+	[ZD_SDate] [datetime] NULL,
+	[ZD_EDate] [datetime] NULL,
+	[ZD_ShuFei] [money] NULL,
+	[ZD_DianFei] [money] NULL,
+	[ZD_OtherFei] [money] NULL,
+	[YeZhuNo] [int] NULL,
+	[ZD_JiaoNa] [int] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[viewWeiHuKind]'))
+EXEC dbo.sp_executesql @statement = N'create view [dbo].[viewWeiHuKind]
+as
+select *
+from WeiHuKind
+' 
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[viewFourth]'))
+EXEC dbo.sp_executesql @statement = N'create view [dbo].[viewFourth]
+as
+select *
+from WeiHu_ZT
+where YeZhuNo=1990010101
+' 
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[view_zhandan_liang]'))
+EXEC dbo.sp_executesql @statement = N'create view [dbo].[view_zhandan_liang]
+as
+select *
+
+from ZhangDang_Liang
+where YeZhuNo=2002152110
+' 
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[conFirst]') AND parent_object_id = OBJECT_ID(N'[dbo].[GuanLiYuan_KZ]'))
+ALTER TABLE [dbo].[GuanLiYuan_KZ]  WITH CHECK ADD  CONSTRAINT [conFirst] CHECK  (([GLY_Sex]='Å®' OR [GLY_Sex]='ÄÐ'))
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[GLY_Tel_CK]') AND parent_object_id = OBJECT_ID(N'[dbo].[GuanLiYuan_KZ]'))
+ALTER TABLE [dbo].[GuanLiYuan_KZ]  WITH CHECK ADD  CONSTRAINT [GLY_Tel_CK] CHECK  (([GLY_Tel]>=(1000000) AND [GLY_Tel]<=(9999999)))
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[WeiHuYuan_CK]') AND parent_object_id = OBJECT_ID(N'[dbo].[WeiHuYuan]'))
+ALTER TABLE [dbo].[WeiHuYuan]  WITH CHECK ADD  CONSTRAINT [WeiHuYuan_CK] CHECK  (([WHY_Tel]>=(1000000) AND [WHY_Tel]<=(9999999)))
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[conSecond]') AND parent_object_id = OBJECT_ID(N'[dbo].[YeZhu_KZ]'))
+ALTER TABLE [dbo].[YeZhu_KZ]  WITH CHECK ADD  CONSTRAINT [conSecond] CHECK  (([YZ_sex]='Å®' OR [YZ_sex]='ÄÐ'))
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[YeZhu_Tel_CK]') AND parent_object_id = OBJECT_ID(N'[dbo].[YeZhu_KZ]'))
+ALTER TABLE [dbo].[YeZhu_KZ]  WITH CHECK ADD  CONSTRAINT [YeZhu_Tel_CK] CHECK  (([YZ_Tel]>=(1000000) AND [YZ_Tel]<=(9999999)))
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_WeiHu_JC_WeiHuYuan]') AND parent_object_id = OBJECT_ID(N'[dbo].[WeiHu_JC]'))
+ALTER TABLE [dbo].[WeiHu_JC]  WITH CHECK ADD  CONSTRAINT [FK_WeiHu_JC_WeiHuYuan] FOREIGN KEY([WeiHuYuan_No])
+REFERENCES [dbo].[WeiHuYuan] ([WeiHuYuan_No])
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ZhangDang_Liang_YeZhu_JC]') AND parent_object_id = OBJECT_ID(N'[dbo].[ZhangDang_Liang]'))
+ALTER TABLE [dbo].[ZhangDang_Liang]  WITH CHECK ADD  CONSTRAINT [FK_ZhangDang_Liang_YeZhu_JC] FOREIGN KEY([YeZhuNo])
+REFERENCES [dbo].[YeZhu_JC] ([YeZhuNo])
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_WeiHu_ZT_YeZhu_JC]') AND parent_object_id = OBJECT_ID(N'[dbo].[WeiHu_ZT]'))
+ALTER TABLE [dbo].[WeiHu_ZT]  WITH CHECK ADD  CONSTRAINT [FK_WeiHu_ZT_YeZhu_JC] FOREIGN KEY([YeZhuNo])
+REFERENCES [dbo].[YeZhu_JC] ([YeZhuNo])
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ZhangDan_Money_ZhangDang_Liang]') AND parent_object_id = OBJECT_ID(N'[dbo].[ZhangDan_Money]'))
+ALTER TABLE [dbo].[ZhangDan_Money]  WITH CHECK ADD  CONSTRAINT [FK_ZhangDan_Money_ZhangDang_Liang] FOREIGN KEY([ZD_No])
+REFERENCES [dbo].[ZhangDang_Liang] ([ZD_No])

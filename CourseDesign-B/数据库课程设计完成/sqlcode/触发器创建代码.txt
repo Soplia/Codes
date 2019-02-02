@@ -1,0 +1,44 @@
+create trigger proSecond
+on ZhangDang_Liang
+after update,insert
+as 
+begin
+  declare @t_shuiLiang int,@t_dianLiang int
+  declare @t_shuiPrice int,@t_dianPrice int
+  declare @t_shuiMoney int,@t_dianMoney int
+  declare @t_No int, @t_sdate datetime,@t_edate datetime,
+			@t_yezhuno int
+			
+			
+  select @t_shuiPrice=Price_Shui,@t_dianPrice=Price_Dian
+  from price
+  
+  declare curFirst cursor
+  for 
+  select ZD_No,ZD_SDate,ZD_EDate,ZD_ShuLang,ZD_DianLang,YeZhuNo
+  from ZhangDang_Liang
+  
+  open curFirst
+  fetch curFirst into @t_No,@t_sdate,@t_edate,@t_shuiLiang,
+		@t_dianLiang,@t_yezhuno
+		
+  while(@@FETCH_STATUS=0)
+  begin
+	set @t_shuiMoney=@t_shuiPrice*@t_shuiLiang
+	set @t_dianMoney=@t_dianPrice*@t_dianLiang
+	update ZhangDan_Money
+	set ZD_SDate=@t_sdate,ZD_EDate=@t_edate
+	,ZD_ShuFei=@t_shuiMoney,ZD_DianFei=@t_dianMoney
+	,YeZhuNo=@t_yezhuno
+	where  ZD_No=@t_No
+	
+	fetch curFirst into @t_No,@t_sdate,@t_edate,@t_shuiLiang,
+		@t_dianLiang,@t_yezhuno
+  end
+ 
+  close curFirst
+  deallocate curFirst
+ 
+
+end
+

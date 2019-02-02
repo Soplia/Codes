@@ -1,0 +1,6 @@
+RpiServer£º       101.200.41.248 6969
+
+RpiCommandServer£º101.200.41.248 6968
+
+Ê÷İ®ÅÉ£º 	  ÓÃ»§Ãû£ºpi
+		  ÃÜÂë  £ºraspberry

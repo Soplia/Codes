@@ -1,0 +1,16 @@
+
+
+
+// Instantiate the module
+register instance_name (
+    .Clk(Clk), 
+    .RegARdAddr(RegARdAddr), 
+    .RegBRdAddr(RegBRdAddr), 
+    .RegWrAddr(RegWrAddr), 
+    .RegWrData(RegWrData), 
+    .RegWrite(RegWrite), 
+    .RegARdData(RegARdData), 
+    .RegBRdData(RegBRdData)
+    );
+
+

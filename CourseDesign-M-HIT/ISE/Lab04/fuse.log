@@ -1,0 +1,42 @@
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "F:/ISE/Lab04/Top_tb_isim_beh.exe" -prj "F:/ISE/Lab04/Top_tb_beh.prj" "work.Top_tb" "work.glbl" 
+ISim P.20131013 (signature 0x7708f090)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Analyzing Verilog file "F:/ISE/Lab04/ipcore_dir/Clk_gen.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/signext.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/register.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/Instruction_memory.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/Data_memory.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/Ctr.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/ALU.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/Top.v" into library work
+Analyzing Verilog file "F:/ISE/Lab04/Top_tb.v" into library work
+Analyzing Verilog file "d:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+WARNING:HDLCompiler:1016 - "F:/ISE/Lab04/Top_tb.v" Line 36: Port Switch is not connected to this instance
+WARNING:HDLCompiler:1016 - "F:/ISE/Lab04/Top.v" Line 96: Port MemRead is not connected to this instance
+Completed static elaboration
+Compiling module IBUFG
+Compiling module dcm_sp_clock_divide_by_2
+Compiling module dcm_sp_maximum_period_check(cloc...
+Compiling module dcm_sp_maximum_period_check(cloc...
+Compiling module dcm_sp_clock_lost
+Compiling module DCM_SP(CLKFX_DIVIDE=25,CLKFX_MUL...
+Compiling module BUFG
+Compiling module Clk_gen
+Compiling module ALU
+Compiling module register
+Compiling module Ctr
+Compiling module Data_memory
+Compiling module Instruction_memory
+Compiling module signext
+Compiling module Top
+Compiling module Top_tb
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 9 sub-compilation(s) to finish...
+Compiled 17 Verilog Units
+Built simulation executable F:/ISE/Lab04/Top_tb_isim_beh.exe
+Fuse Memory Usage: 33092 KB
+Fuse CPU Usage: 998 ms
